@@ -80,6 +80,8 @@ export const Steam = () => {
     const { toasts, showSuccess, showError } = useToastAlert();
     const [ profile, setProfile ] = useState("");
     const [ editing, setEditing ] = useState("");
+    
+    const steamid = sessionStorage.getItem("steamid");
 
     const location = useLocation();
     const currentPath = location.pathname + location.search
@@ -115,13 +117,11 @@ export const Steam = () => {
     }
 
     useEffect(() => {
-        const steamid = sessionStorage.getItem("steamid");
-
         if (steamid) {
             setProfile(steamid);
             setEditing(steamid);
         }
-    }, []);
+    }, [steamid]);
 
     return (
         <>
