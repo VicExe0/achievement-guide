@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/achievement-guide/" />
+    <script>
+      const redirectTo = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.replace(`/achievement-guide/?redirect=${redirectTo}`);
+    </script>
   </head>
   <body></body>
 </html>
