@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useToastAlert } from "@/hooks/useToastAlert";
 import { ToastAlerts } from "./toastalerts";
 
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -80,6 +81,10 @@ export const Steam = () => {
     const [ profile, setProfile ] = useState("");
     const [ editing, setEditing ] = useState("");
 
+    const location = useLocation();
+    const currentPath = location.pathname + location.search
+    const steamLoginUrl = "https://achguide.goldenowy23.workers.dev/steam/auth?returnto=" + encodeURIComponent(currentPath)
+
     const saveProfile = async () => {
         if (!editing) {
             sessionStorage.removeItem("steamid");
@@ -132,6 +137,9 @@ export const Steam = () => {
                             Add your steam id to automatically check already obtained achievements.
                         </DialogDescription>
                     </DialogHeader>
+                    <div className="flex">
+                        <button onClick={() => window.location.href = steamLoginUrl}><img src="/achievement-guide/steamlogin.png" alt="steam login image" /></button>
+                    </div>
                     <div className="grid gap-3">
                         <Label htmlFor="steamid-1">Steam profile<span className="text-red-500">*</span></Label>
                         <Input className="rounded-[8px]" required={true} id="steamid-1" name="steamid" placeholder="vanity/id/profile url" onChange={(e) => {setEditing(e.target.value)}} value={editing} />
