@@ -16,8 +16,8 @@ const badgeMap = {
 } as const;
 
 const getBadge = (color: string, text: string, index: number) => {
-  const Badge = badgeMap[color as keyof typeof badgeMap]
-  return Badge ? <Badge key={index}>{text}</Badge> : null
+  const Badge = badgeMap[color as keyof typeof badgeMap];
+  return Badge ? <Badge key={index}>{text}</Badge> : null;
 }
 
 type SteamAchievement = {
@@ -49,7 +49,7 @@ const GamePage = ({ game } : { game: string }) => {
                     validateStatus: () => true
                 });
 
-                setUserAchievements(response.data);
+                if (response.status === 200) setUserAchievements(response.data);
             }
 
             setGameAchievements(gameinfo.achievements);
@@ -80,7 +80,7 @@ const GamePage = ({ game } : { game: string }) => {
                                     )}
                                     </AchievementBox>
                                 </div>
-                                <div className="bg-popover text-popover-foreground rounded-xl p-2 flex flex-col">
+                                <div className="bg-popover text-popover-foreground rounded-[8px] p-2 flex flex-col">
                                     {item.content ?? null}
                                 </div>
                             </>

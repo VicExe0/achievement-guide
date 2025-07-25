@@ -24,7 +24,7 @@ export const TopBar = () => {
 
     return (
         <>
-            <CommandDialog open={open} onOpenChange={setOpen} className="rounded-xl">
+            <CommandDialog open={open} onOpenChange={setOpen} className="rounded-[8px]">
                 <Search />
             </CommandDialog>
             <div className="w-screen h-[var(--topbar-height)] z-50 flex text-secondary-foreground px-2.5 items-center justify-between bg-topbar fixed">

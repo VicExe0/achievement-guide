@@ -19,7 +19,6 @@ export const Search = () => {
                         </CommandItem>
                     )}
                 </CommandGroup>
-                
                 {Object.entries(ACHIEVEMENTS).map(([game, data]) => (
                     <Fragment key={game}>
                         <CommandSeparator />
@@ -34,7 +33,6 @@ export const Search = () => {
                         </CommandGroup>
                     </Fragment>
                 ))}
-
             </CommandList>
         </Command>
     )

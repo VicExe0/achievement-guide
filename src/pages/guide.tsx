@@ -24,7 +24,7 @@ const Guide = () => {
                 <div className="w-screen min-h-screen flex flex-col">
                     <TopBar />
                     <div className="relative mt-[48px] overflow-y-scroll hide-scrollbar flex">
-                        <SideBar game={game} className="relative mt-[48px] w-64 flex-shrink-0" />
+                        <SideBar game={game} className="fixed top-[48px] w-64 flex-shrink-0" />
                         <main className="relative p-2 flex-1">
                             <div className="fixed left-2 z-50 md:hidden w-[40px] h-[40px] bg-muted shadow-md rounded-md flex items-center justify-center transition-colors duration-200 hover:bg-accent">
                                 <SidebarTrigger className="cursor-pointer transition-colors duration-200 hover:bg-accent" />
