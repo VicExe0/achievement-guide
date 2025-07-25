@@ -1,0 +1,4 @@
+.achievement-photo {
+    width: var(--achievement-height) !important;
+    height: var(--achievement-height) !important;
+}

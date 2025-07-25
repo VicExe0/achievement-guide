@@ -1,0 +1,22 @@
+.btn-github {
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  font-weight: 800;
+  place-content: center;
+
+  padding: 0.75rem 1rem;
+  font-size: 0.825rem;
+  line-height: 1rem;
+
+  background-color: transparent;
+
+  color: var(--color-topbar-foreground);
+}
+
+.btn-github:hover {
+  color: var(--acc);
+  transform: scale(95%);
+}
