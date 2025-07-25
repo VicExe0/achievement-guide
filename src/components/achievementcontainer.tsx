@@ -25,8 +25,8 @@ type AchievementSectionType = {
 export const AchievementBox = ( { title, description, image, children, checked, onToggle }: AchievementBoxType ) => {
     return (
         <div className="flex min-h-[var(--achievement-height)] p-2 gap-1 bg-popover text-popover-foreground w-full rounded-[8px]">
-            <div className="flex flex-row gap-3 justify-evenly items-center min-w-[68px] h-[68px] shrink-0">
-                <CheckMark className="mx-1" onChange={onToggle} checked={checked} />
+            <div className="flex flex-row gap-[8px] justify-evenly items-center min-w-[68px] h-[68px] shrink-0">
+                <CheckMark className="mx-[8px]" onChange={onToggle} checked={checked} />
                 <img className="max-w-[64px] max-h-[64px] object-contain" src={image} alt="Achievement icon" />
             </div>
             <div className="flex flex-col justify-center px-2 min-w-0">
