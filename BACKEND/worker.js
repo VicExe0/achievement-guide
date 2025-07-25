@@ -5,6 +5,9 @@
  */
 
 const RATE_LIMIT = new Map();
+const REALM = "https://achguide.goldenowy23.workers.dev";
+const STEAM_OPENID = "https://steamcommunity.com/openid/login";
+const GHPAGE = "https://vicexe0.github.io/achievement-guide";
 
 const getAllAchievements = async ( appid, key ) => {
     const params = new URLSearchParams({
@@ -56,10 +59,10 @@ const merge = ( arr1, arr2 ) => {
 const getAchievements = async ( url, env ) => {
     const steamid = url.searchParams.get("steamid");
     const appid = url.searchParams.get("appid");
-
+    
+    if (!steamid || !appid) return [ 400, "Missing parameters." ];
+    
     const KEY = env.STEAM_API_KEY;
-
-    if (!steamid || !appid) return [ 400, "Missing steamid or appid." ];
 
     const allachievements = (await getAllAchievements(appid, KEY))?.game.availableGameStats.achievements;
     const userAchievements = (await getPlayerAchievements(appid, steamid, KEY))?.playerstats.achievements;
@@ -78,6 +81,8 @@ const getSteamAccount = async ( url, env ) => {
     const value = url.searchParams.get("value");
     const type = url.searchParams.get("type");
 
+    if (!value || !type) return [ 400, "Missing parameters." ];
+
     const KEY = env.STEAM_API_KEY;
 
     let response, params;
@@ -88,7 +93,7 @@ const getSteamAccount = async ( url, env ) => {
                 key: KEY,
                 steamids: value
             })
-            response = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?${params}`);
+            response = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?${params.toString()}`);
 
             break;
 
@@ -97,7 +102,7 @@ const getSteamAccount = async ( url, env ) => {
                 key: KEY,
                 vanityurl: value
             })
-            response = await fetch(`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?${params}`);
+            response = await fetch(`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?${params.toString()}`);
 
             break;
 
@@ -108,6 +113,59 @@ const getSteamAccount = async ( url, env ) => {
     const data = await response.json();
 
     return [ null, data ];
+}
+
+const loginToSteam = async ( url ) => {
+    const returnTo = url.searchParams.get("returnto");
+
+    if (!returnTo) return [ 400, "Missing parameters." ];
+
+    const params = new URLSearchParams({
+        "openid.ns": "http://specs.openid.net/auth/2.0",
+        "openid.mode": "checkid_setup",
+        "openid.return_to": `${REALM}/steam/return?redirect=${encodeURIComponent(returnTo)}`,
+        "openid.realm": REALM,
+        "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
+        "openid.claimed_id": "http://specs.openid.net/auth/2.0/identifier_select"
+    });
+
+    return [ 302, `${STEAM_OPENID}?${params.toString()}` ];
+}
+
+const authUser = async ( url ) => {
+    const searchParams = url.searchParams;
+    const verifyParams = new URLSearchParams();
+    
+    for (const [ key, value ] of searchParams) {
+        verifyParams.append(key, value);
+    }
+
+    verifyParams.set("openid.mode", "check_authentication");
+
+    try {
+        const response = await fetch(STEAM_OPENID, {
+            method: "POST",
+            body: verifyParams.toString(),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        });
+
+        const text = await response.text();
+
+        if (!text.includes("is_valid:true"))  return [ 400, "OpenID verification failed" ];
+
+        const claimedID = searchParams.get("openid.claimed_id");
+        const steamIDMatch = claimedID && claimedID.match(/\/id\/(\d+)$/) || claimedID.match(/\/openid\/id\/(\d+)$/);
+
+        if (!steamIDMatch) return [ 400, "Failed to extract SteamID" ];
+
+        const steamID = steamIDMatch[1];
+
+        const redirectParam = encodeURIComponent(url.searchParams.get("redirect") || "");
+        
+        return [ 302, `${GHPAGE}/login-success?steamid=${steamID}&redirect=${redirectParam}` ];
+    } catch {
+        return [ 500, "Steam verification error" ];
+    }
 }
 
 const isRateLimited = async ( ip ) => {
@@ -148,16 +206,28 @@ export default {
 
         switch (url.pathname) {
             case "/getsteamaccount":
-                [error, data] = await getSteamAccount(url, env);
+                [ error, data ] = await getSteamAccount(url, env);
                 break;
 
             case "/getachievements":
-                [error, data] = await getAchievements(url, env);
+                [ error, data ] = await getAchievements(url, env);
+                break;
+
+            case "/steam/auth":
+                [ error, data ] = await loginToSteam(url);
+
+                break;
+
+            case "/steam/return":
+                [ error, data ] = await authUser(url);
+
                 break;
 
             default:
                 return new Response("Not found", { status: 404 });
         }
+
+        if (error === 302) return Response.redirect(data, 302);
 
         if (error) return new Response(data, { status: error });
 
