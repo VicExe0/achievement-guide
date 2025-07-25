@@ -2,7 +2,7 @@ import { GameFrame } from "@/components/gameframe";
 import { TopBar } from "@/components/topbar";
 import { Button } from "@/components/ui/button";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import { ACHIEVEMENTS } from "@/constants/achievements";
@@ -10,11 +10,28 @@ import { ACHIEVEMENTS } from "@/constants/achievements";
 import { ShineText } from "@/components/textshine";
 
 const Home = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const { pathname } = useLocation();
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+
+        const steamid = params.get("steamid");
+        const redirect = params.get("redirect") || "/";
+
+        if (steamid) {
+            sessionStorage.setItem("steamid", steamid.toString());
+
+            navigate(redirect, { replace: true });
+        }
+
+    }, [location, navigate]);
 
     const scroll = () => {
         document.getElementById("games")?.scrollIntoView({ behavior: "smooth" });

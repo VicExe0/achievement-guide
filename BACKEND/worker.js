@@ -162,7 +162,7 @@ const authUser = async ( url ) => {
 
         const redirectParam = encodeURIComponent(url.searchParams.get("redirect") || "");
         
-        return [ 302, `${GHPAGE}/login-success?steamid=${steamID}&redirect=${redirectParam}` ];
+        return [ 302, `${GHPAGE}?steamid=${steamID}&redirect=${redirectParam}` ];
     } catch {
         return [ 500, "Steam verification error" ];
     }
