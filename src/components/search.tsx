@@ -7,6 +7,14 @@ import { ACHIEVEMENTS } from "@/constants/achievements.tsx";
 export const Search = () => {
     const navigate = useNavigate();
 
+    const goto = ( path: string, id: string ) => {
+        navigate(path);
+
+        setTimeout(() => {
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
+    }
+
     return (
         <Command>
             <CommandInput placeholder="Search..." />
@@ -25,7 +33,7 @@ export const Search = () => {
                         <CommandGroup heading={`${data.name} Achievements`}>
                         {data.achievements.map((achievement) => (
                             <CommandItem key={game + achievement.title} className="rounded-[8px]">
-                                <button className="w-full h-full text-left cursor-pointer" onClick={() => navigate(`/guide/${game}#${achievement.id}`)}>
+                                <button className="w-full h-full text-left cursor-pointer" onClick={() => goto(`/guide/${game}#${achievement.id}`, achievement.id)}>
                                     {achievement.title}
                                 </button>
                             </CommandItem>
