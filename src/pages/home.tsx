@@ -25,11 +25,8 @@ const Home = () => {
         const steamid = params.get("steamid");
         const redirect = params.get("redirect") || "/";
 
-        if (steamid) {
-            sessionStorage.setItem("steamid", steamid.toString());
-
-            navigate(redirect, { replace: true });
-        }
+        if (steamid) sessionStorage.setItem("steamid", steamid.toString());
+        if (steamid || redirect !== "/") navigate(redirect, { replace: true });
 
     }, []);
 
