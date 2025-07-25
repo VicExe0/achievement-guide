@@ -26,7 +26,11 @@ const Home = () => {
         const redirect = params.get("redirect") || "/";
 
         if (steamid) sessionStorage.setItem("steamid", steamid.toString());
-        if (steamid || redirect !== "/") navigate(redirect, { replace: true });
+        if (steamid || redirect !== "/") {
+            const redirectPath = redirect.startsWith("/achievement-guide") ? redirect.slice("/achievement-guide".length) : redirect;
+
+            navigate(redirectPath || "/", { replace: true });
+        }
 
     }, []);
 
