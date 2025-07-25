@@ -75,9 +75,9 @@ const GamePage = ({ game } : { game: string }) => {
                             <>
                                 <div className="w-full">
                                     <AchievementBox title={item.title} description={item.description} image={item.image} checked={checked} onToggle={setChecked}>
-                                    {item.badges.map(([color, text], badge_index) =>
-                                        getBadge(color, text, badge_index)
-                                    )}
+                                        {item.badges.map(([color, text], badge_index) =>
+                                            getBadge(color, text, badge_index)
+                                        )}
                                     </AchievementBox>
                                 </div>
                                 <div className="bg-popover text-popover-foreground rounded-[8px] p-2 flex flex-col">
