@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from '@/pages/home';
 import Guide from '@/pages/guide';
-import LoginSuccess from './pages/loginsuccess';
+import LoginSuccess from '@/pages/loginsuccess';
 
 import "@/styles/custom.css";
 

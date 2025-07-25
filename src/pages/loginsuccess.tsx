@@ -21,7 +21,9 @@ const LoginSuccess = () => {
 
     }, [location, navigate]);
 
-    return null;
+    return (
+        <><h1>Redirecting</h1></>
+    )
 }
 
 export default LoginSuccess;

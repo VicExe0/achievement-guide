@@ -137,8 +137,8 @@ export const Steam = () => {
                             Add your steam id to automatically check already obtained achievements.
                         </DialogDescription>
                     </DialogHeader>
-                    <div className="flex">
-                        <button onClick={() => window.location.href = steamLoginUrl}><img src="/achievement-guide/steamlogin.png" alt="steam login image" /></button>
+                    <div className="flex items-center justify-center">
+                        <button className="cursor-pointer" onClick={() => window.location.href = steamLoginUrl}><img src="/achievement-guide/steamlogin.png" alt="steam login image" /></button>
                     </div>
                     <div className="grid gap-3">
                         <Label htmlFor="steamid-1">Steam profile<span className="text-red-500">*</span></Label>
