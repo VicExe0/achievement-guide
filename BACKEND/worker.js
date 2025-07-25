@@ -4,6 +4,7 @@
  * 
  */
 
+const RATE_LIMIT = new Map();
 
 const getAllAchievements = async ( appid, key ) => {
     const params = new URLSearchParams({
@@ -11,10 +12,15 @@ const getAllAchievements = async ( appid, key ) => {
         appid: appid
     });
 
-    const response = await fetch(`https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?${params}`);
-    const data = await response.json();
+    try {
+        const response = await fetch(`https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?${params}`);
+        const data = await response.json();
 
-    return data;
+        return data;
+
+    } catch {
+        return 500;
+    }
 }
 
 const getPlayerAchievements = async ( appid, steamid, key ) => {
@@ -24,10 +30,15 @@ const getPlayerAchievements = async ( appid, steamid, key ) => {
         appid: appid
     });
 
-    const response = await fetch(`https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?${params}`);
-    const data = await response.json();
+    try {
+        const response = await fetch(`https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?${params}`);
+        const data = await response.json();
 
-    return data;
+        return data;
+
+    } catch {
+        return 500;
+    }
 }
 
 const merge = ( arr1, arr2 ) => {
@@ -55,6 +66,8 @@ const getAchievements = async ( url, env ) => {
 
     if (!userAchievements) return [ 400, "This user doesnt own this game." ];
     if (!allachievements) return [ 404, "This game doesnt exist." ];
+
+    if (userAchievements === 500 || allachievements === 500) return [ 500, "Steam API error." ];
 
     const data = merge(allachievements, userAchievements);
 
@@ -97,8 +110,32 @@ const getSteamAccount = async ( url, env ) => {
     return [ null, data ];
 }
 
+const isRateLimited = async ( ip ) => {
+    const now = Date.now();
+    const window = 60 * 1000;
+    const limit = 30;
+
+    const record = RATE_LIMIT.get(ip);
+
+    if (!record || now - record.start > window) {
+        RATE_LIMIT.set(ip, { count: 1, start: now });
+        return false;
+    }
+
+    if (record.count >= limit) return true;
+
+    record.count++;
+    return false;
+}
+
 export default {
     async fetch(request, env, ctx) {
+        const ip = request.headers.get("CF-Connecting-IP");
+
+        if (await isRateLimited(ip)) {
+            return new Response("Too many requests", { status: 429 });
+        }
+
         const url = new URL(request.url);
 
         if (request.method === "GET") {

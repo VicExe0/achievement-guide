@@ -48,7 +48,7 @@ const getSteamID = async ( value: string ): Promise<string | null> => {
 
     if (!steam) return null;
 
-    const response = await axios.get("https://bold-union-9a07.goldenowy23.workers.dev/getsteamaccount", {
+    const response = await axios.get("https://achguide.goldenowy23.workers.dev/getsteamaccount", {
         params: {
             type: steam.type,
             value: steam.value

@@ -44,7 +44,7 @@ const GamePage = ( { game } : { game: string } ) => {
             const appid = gameinfo?.appid;
 
             if (steamid && appid) {
-                const response = await axios.get("https://bold-union-9a07.goldenowy23.workers.dev/getachievements", {
+                const response = await axios.get("https://achguide.goldenowy23.workers.dev/getachievements", {
                     params: { steamid, appid },
                     validateStatus: () => true
                 });
