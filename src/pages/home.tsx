@@ -31,7 +31,7 @@ const Home = () => {
             navigate(redirect, { replace: true });
         }
 
-    }, [location, navigate]);
+    }, []);
 
     const scroll = () => {
         document.getElementById("games")?.scrollIntoView({ behavior: "smooth" });
