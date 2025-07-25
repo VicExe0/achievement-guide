@@ -5,7 +5,7 @@
  */
 
 const RATE_LIMIT = new Map();
-const REALM = "https://achguide.goldenowy23.workers.dev";
+const REALM = "https://achguide.vicexe.ovh";
 const STEAM_OPENID = "https://steamcommunity.com/openid/login";
 const GHPAGE = "https://vicexe0.github.io/achievement-guide";
 
