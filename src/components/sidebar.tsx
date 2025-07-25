@@ -14,7 +14,7 @@ export const SideBar = ({ game, className }: { game: string; className?: string 
     }
 
     return (
-        <Sidebar variant="sidebar" className={`${className ?? ""} sm:flex mt-[var(--topbar-height)]`}>
+        <Sidebar variant="sidebar" className={`${className ?? ""} sm:flex`}>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Achievements</SidebarGroupLabel>
