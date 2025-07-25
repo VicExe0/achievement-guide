@@ -2,7 +2,7 @@ import { useState, useEffect, type ReactNode } from "react";
 
 import { CheckMark } from "./checkmark";
 
-import "@/assets/styles/achievementcontainer.css";
+import "@/styles/achievementcontainer.css";
 
 type AchievementBoxType = {
     title: string
@@ -22,7 +22,7 @@ type AchievementSectionType = {
     ) => ReactNode 
 }
 
-export const AchievementBox = ({ title, description, image, children, checked, onToggle }: AchievementBoxType) => {
+export const AchievementBox = ( { title, description, image, children, checked, onToggle }: AchievementBoxType ) => {
     return (
         <div className="flex min-h-[var(--achievement-height)] p-2 gap-1 bg-popover text-popover-foreground w-full rounded-[8px]">
             <div className="flex flex-row gap-3 justify-evenly items-center min-w-[68px] h-[68px] shrink-0">
@@ -40,7 +40,7 @@ export const AchievementBox = ({ title, description, image, children, checked, o
     )
 }
 
-export const AchievementSection = ({ id, defaultChecked = false, children }: AchievementSectionType) => {
+export const AchievementSection = ( { id, defaultChecked = false, children }: AchievementSectionType ) => {
     const [checked, setChecked] = useState(defaultChecked);
 
     useEffect(() => {

@@ -51,12 +51,3 @@ const Home = () => {
 }
 
 export default Home;
-
-/*
-
-
-{GAMES.map((item, index) =>
-                                <GameFrame key={index} href={`/guide/${item.path}`}>
-                                    <img className="w-full h-full object-cover" src={`/${item.path}.png`} alt={item.name} />
-                                </GameFrame>
-                            )}*/

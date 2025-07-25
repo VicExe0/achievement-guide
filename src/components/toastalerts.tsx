@@ -1,9 +1,9 @@
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle2Icon, AlertCircleIcon } from "lucide-react";
 
-import "@/assets/styles/toastalerts.css";
+import "@/styles/toastalerts.css";
 
-export const ToastAlerts = ({ toasts }: { toasts: any[] }) => {
+export const ToastAlerts = ( { toasts }: { toasts: any[] } ) => {
     return (
         <div className="fixed bottom-4 right-4 flex flex-col z-50">
             {toasts.map(toast => (

@@ -1,7 +1,6 @@
-//import { StrictMode } from 'react'
-import '@/assets/styles/index.css'
-import { createRoot } from 'react-dom/client'
-import App from '@/App.tsx'
+import '@/styles/index.css';
+import { createRoot } from 'react-dom/client';
+import App from '@/App.tsx';
 
 const theme = localStorage.getItem("theme");
 

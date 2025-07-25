@@ -1,14 +1,14 @@
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 
 import { ACHIEVEMENTS } from "@/constants/achievements";
 
 import type { GameAchievements, Achievement } from "@/constants/achievements";
 
-export const SideBar = ({ game, className }: { game: string; className?: string }) => {
+export const SideBar = ( { game, className }: { game: string; className?: string } ) => {
     const data: GameAchievements | undefined = ACHIEVEMENTS[game as keyof typeof ACHIEVEMENTS];
     const achievements: Achievement[] = data?.achievements ?? [];
 
-    const scroll = ( e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, section: string) => {
+    const scroll = ( e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, section: string ) => {
         e.preventDefault();
         document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "center" });
     }

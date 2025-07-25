@@ -1,4 +1,4 @@
-import '@/assets/styles/checkmark.css'
+import '@/styles/checkmark.css';
 
 type CheckboxProps = {
     className?: string,
@@ -6,7 +6,7 @@ type CheckboxProps = {
     checked: boolean
 };
 
-export const CheckMark = ({ className, onChange, checked }: CheckboxProps) => {
+export const CheckMark = ( { className, onChange, checked }: CheckboxProps ) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.checked);
     }

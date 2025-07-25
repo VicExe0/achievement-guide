@@ -1,4 +1,4 @@
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/components/ui/separator";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ const badgeMap = {
   blue: BlueBadge
 } as const;
 
-const getBadge = (color: string, text: string, index: number) => {
+const getBadge = ( color: string, text: string, index: number ) => {
   const Badge = badgeMap[color as keyof typeof badgeMap];
   return Badge ? <Badge key={index}>{text}</Badge> : null;
 }
@@ -30,7 +30,7 @@ type SteamAchievement = {
   achieved: number
   unlocktime: number
 }
-const GamePage = ({ game } : { game: string }) => {
+const GamePage = ( { game } : { game: string } ) => {
     const [ userAchievements, setUserAchievements ] = useState<SteamAchievement[]>([]);
     const [ gameAchievements, setGameAchievements ] = useState<Achievement[]>([]);
     const [ achievedSet, setAchievedSet ] = useState<Set<string>>(new Set());

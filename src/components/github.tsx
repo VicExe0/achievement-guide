@@ -1,4 +1,4 @@
-import "../assets/styles/github.css"
+import "../styles/github.css";
 
 export const Github = () => {
     return (

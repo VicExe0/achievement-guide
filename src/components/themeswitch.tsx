@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-import "../assets/styles/themeswitch.css"
+import "@/styles/themeswitch.css";
 
 export const ThemeSwitch = () => {
     const [ checked, setChecked ] = useState(false);
@@ -15,7 +15,7 @@ export const ThemeSwitch = () => {
 
     }, []);
 
-    const checkboxHadle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checkboxHadle = ( e: React.ChangeEvent<HTMLInputElement> ) => {
         setChecked(e.target.checked);
 
         if (!checked) {

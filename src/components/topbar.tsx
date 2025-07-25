@@ -1,9 +1,9 @@
-import { CommandDialog, CommandShortcut } from "@/components/ui/command"
+import { CommandDialog, CommandShortcut } from "@/components/ui/command";
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 
-import { Search } from "@/components/search"
-import { ThemeSwitch } from "./themeswitch"
+import { Search } from "@/components/search";
+import { ThemeSwitch } from "./themeswitch";
 import { Github } from "./github";
 import { Steam } from "./steam";
 
@@ -12,13 +12,14 @@ export const TopBar = () => {
     const [ open, setOpen ] = useState(false);
 
     useEffect(() => {
-        const down = (e: KeyboardEvent) => {
+        const down = ( e: KeyboardEvent ) => {
             if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault();
                 setOpen((open) => !open);
             }
         }
         document.addEventListener("keydown", down);
+
         return () => document.removeEventListener("keydown", down);
     }, [])
 
