@@ -12,6 +12,7 @@ export type Achievement = {
 export type GameAchievements = {
   name: string
   appid: number
+  completed: boolean
   achievements: Achievement[]
 };
 

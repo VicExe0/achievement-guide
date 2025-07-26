@@ -3,6 +3,7 @@ import { type GameAchievements } from "@/constants/achievements";
 const data: GameAchievements = {
     name: "Portal",
     appid: 400,
+    completed: false,
     achievements: [
         {
             title: "Lab Rat",

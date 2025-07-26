@@ -3,6 +3,7 @@ import { type GameAchievements } from "@/constants/achievements";
 const data: GameAchievements = {
     name: "Hello Neighbor: Hide and Seek",
     appid: 960420,
+    completed: false,
     achievements: [
         {
             title: "Let the seeking begin!",

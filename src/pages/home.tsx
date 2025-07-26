@@ -58,6 +58,12 @@ const Home = () => {
                             {Object.entries(ACHIEVEMENTS).map(([key, value], index) => (
                                 <GameFrame key={index} href={`/guide/${key}`}>
                                     <img className="w-full h-full object-cover" src={`/achievement-guide/${key}.png`} alt={value.name} />
+                                    { value.completed ? null : 
+                                    <div className="absolute top-0 w-full h-[40px] flex justify-center items-center">
+                                        <div className="absolute w-full h-full bg-red-500 opacity-90 "></div>
+                                        <span className="text-2xl font-bold z-10">Soon</span>
+                                    </div>
+                                    }
                                 </GameFrame>
                             ))}
                         </div>

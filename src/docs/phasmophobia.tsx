@@ -3,6 +3,7 @@ import { type GameAchievements } from "@/constants/achievements";
 const data: GameAchievements = {
     name: "Phasmophobia",
     appid: 739630,
+    completed: false,
     achievements: [
         {
             title: "Banshee Discovered",

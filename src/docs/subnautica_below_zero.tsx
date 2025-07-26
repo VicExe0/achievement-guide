@@ -3,6 +3,7 @@ import { type GameAchievements } from "@/constants/achievements";
 const data: GameAchievements = {
     name: "Subnautica: Below Zero",
     appid: 848450,
+    completed: false,
     achievements: [
         {
             title: "Drop in the Ocean",

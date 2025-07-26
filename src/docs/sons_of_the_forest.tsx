@@ -3,6 +3,7 @@ import { type GameAchievements } from "@/constants/achievements";
 const data: GameAchievements = {
     name: "Sons Of The Forest",
     appid: 1326470,
+    completed: false,
     achievements: [
         {
             title: "THIS CAN'T BE HEALTHY",

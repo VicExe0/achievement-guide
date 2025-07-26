@@ -3,6 +3,7 @@ import { type GameAchievements } from "@/constants/achievements";
 const data: GameAchievements = {
     name: "Hello Neighbor 2",
     appid: 1321680,
+    completed: false,
     achievements: [
         {
             title: "Welcome to Raven Brooks",
