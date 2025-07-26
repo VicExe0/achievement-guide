@@ -30,7 +30,7 @@ export const AchievementBox = ( { title, description, image, children, checked, 
                 <img className="max-w-[64px] max-h-[64px] object-contain" src={image} alt="Achievement icon" />
             </div>
             <div className="flex flex-col justify-center px-2 min-w-0">
-                <div className="flex gap-1">
+                <div className="flex gap-1 flex-wrap">
                     {children}
                 </div>
                 <h3 className="font-bold whitespace-break-spaces">{title}</h3>

@@ -12,7 +12,7 @@ const data: GameAchievements = {
             badges: [
                 [ "green", "Easy" ],
                 [ "green", "Fast" ],
-                [ "blue", "Blue key (optional)" ],
+                [ "blue", "Blue key (o)" ],
             ],
             content: (
                 <>
